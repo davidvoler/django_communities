@@ -1,0 +1,27 @@
+*.py[cod]
+*~
+/db/
+/db/hdi.db
+
+# Local settings
+/src/hdi/local_settings.py
+
+# collected static files
+/static/
+
+# virtualenv stuff
+/bin/
+/lib/
+/include/
+/man/
+/share/
+# aptana project files
+/.project
+/.pydevproject
+/man/
+/.settings/
+.DS_Store
+.Python
+/local/
+/media
+/local
