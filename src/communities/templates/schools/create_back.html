@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{%load i18n%}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <form method="post" class='bs-example form-horizontal'>
+        <div class="well">
+        {% csrf_token %}
+        {% crispy form %}
+        </div>
+    </form>
+{% endblock content %}

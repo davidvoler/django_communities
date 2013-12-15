@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{%load i18n%}
+
+
+{% block content %}
+
+<div class="list-group">
+ {% for s in object_list %}
+   <a href="/schools/s/{{s.slug}}/" class="list-group-item">
+     <h4 class="list-group-item-heading">{{ s.name }}</h4>
+     <p class="list-group-item-text">
+     <strong>{%trans 'Learning Languages'%}:</strong>
+     {%for l in s.langs.all|slice:":4"%}
+     
+     <sub>{{l}},</sub>
+	{%endfor%}
+	{%if s.langs.all.count > 5 %}
+     <sub>{{s.langs.all.count}} {%trans 'Languages'%}</sub>
+	{%endif%}
+     </p>
+     <p class="list-group-item-text">
+     <strong>{%trans 'Explanation Languages'%}:</strong>
+     {%for l in s.exp_langs.all|slice:":4"%}
+     <sub>{{l}},</sub>
+	{%endfor%}
+	{%if s.exp_langs.all.count > 5 %}
+     <sub>{{s.exp_langs.all.count}} {%trans 'Languages'%}</sub>
+	{%endif%}
+     </p>
+   </a>
+	{%endfor%}
+</div>
+
+{%if 'create_school' in profile.perms %}    
+<div class="well" style="padding: 8px 8px;">
+<a href="/schools/create/"><i class="icon-plus"></i> {%trans 'Create School'%}</a>
+</div>
+{%endif%}    
+{% endblock content %}

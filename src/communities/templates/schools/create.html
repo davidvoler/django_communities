@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{%load i18n%}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+
+{% block content %}
+<script type="text/javascript" src="{%static 'plugin/tinymce/tinymce.min.js'%}"></script>
+<script type="text/javascript">
+tinymce.init({
+	menubar:false,
+    selector: "textarea",
+    statusbar: false
+});
+</script>
+
+
+<style>
+#id_overview{
+	width:100%;
+	height:300px;
+}
+
+</style>
+    <form method="post" class='bs-example form-horizontal'>
+        <div class="well">
+        {% csrf_token %}
+        {% crispy form %}
+        </div>
+    </form>
+{% endblock content %}

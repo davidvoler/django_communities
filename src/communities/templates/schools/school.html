@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{%load i18n%}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{%if notification %}
+<div class="alert alert-dismissable alert-success">
+              <button type="button" class="close" data-dismiss="alert">x</button>
+              <div>{{notification}}</div>
+</div>
+{%endif%}
+
+{{school.description|safe}}
+{%if 'edit_school' in content_perms %}
+<div><a href='/schools/edit/{{school.slug}}/' >{%trans 'Edit School'%}</a></div>
+{%endif%}
+
+
+{%ifequal profile.school school%}
+{%else%}
+<div><a href='/schools/s/{{school.slug}}/?set_active=1' >{%trans 'Set Active School'%}</a></div>
+{%endifequal%}
+
+{%if is_member%}
+{%else%}
+{%if 'join_school' in content_perms %}
+<div><a href='/schools/s/{{school.slug}}/?join=1' >{%trans 'join School'%}</a></div>
+{%endif%}
+{%endif%}
+
+{%if 'view_school_members' in content_perms %}
+
+<div class="list-group">
+<a href="#" class="list-group-item active">{%trans 'Members'%}</a>
+{% for m in school.member_set.all %}
+<a class="list-group-item" title="{{m.user.username}}" href="/schools/member/{{m.pk}}/">
+	<i class="icon-user"></i> {{m.user.username }} 
+</a>
+{%endfor%}
+</div>
+
+
+{%endif%}
+
+
+{% endblock content %}

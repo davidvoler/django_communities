@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{%load i18n%}
+{%block breadcrumbs%}
+    <li><a href="/">{%trans 'Home'%}</a></li>
+    <li class="active">{%trans 'Change Languages'%}</li>
+{%endblock breadcrumbs%}
+{%block page-title%}{%trans 'Change Languages'%}{%endblock page-title%}
+{% block content %}
+ <div class="well">
+    <form method="get"   action="/schools/change_lang/" class='bs-example form-horizontal'>
+        
+        <div  class="form-group">
+        <label for="lang_id" class="control-label col-lg-2">Learning</label>
+        <div class="controls col-lg-8">
+        <select id='lang_id' name='lang_id' class="form-control" >
+        {%for l in  profile.school.langs.all %}
+        <option value='{{l.pk}}' 
+        {%ifequal l.pk profile.get_lang.pk%} selected='selected' {%endifequal %}
+        >{{l}}</option>
+        {%endfor%}
+        </select>
+        <span class="help-block">{%trans 'The language you are learning'%}</span>
+        </div>
+        </div>
+        <div  class="form-group">
+        <label for="exp_lang_id" class="control-label col-lg-2">Speaking</label>
+        <div class="controls col-lg-8">
+        <select id='exp_lang_id' name='exp_lang_id' class="form-control">
+        {%for l in  profile.school.exp_langs.all%}
+        <option value='{{l.pk}}' 
+         {%ifequal l.pk profile.get_exp_lang.pk%} selected='selected' {%endifequal %}
+        >{{l}}</option>
+        {%endfor%}
+        </select>
+        <span class="help-block">{%trans 'The language you speak'%}</span>
+        </div>
+        </div>
+       <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+          <button class="btn btn-default">Cancel</button> 
+          <button type="submit" class="btn btn-primary">{%trans 'Save'%}</button> 
+        </div>
+      </div>
+    </form>
+    </div>
+    
+   
+{% endblock content %}
