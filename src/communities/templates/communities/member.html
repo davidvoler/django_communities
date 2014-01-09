@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{%load i18n%}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div>
+<strong> {%trans 'School'%}:</strong>{{member.school.name}}
+</div>
+<div>
+<strong>{%trans 'Member Type'%}:</strong>{{member.member_type}}
+</div>
+<div>
+<strong>{%trans 'name'%}:</strong>{{member.user.first_name}} {{member.user.last_name}}
+</div>
+{%if member.accepted%}
+<div>{%trans 'active member'%}</div>
+{%else%}
+<div>{%trans 'member is awaiting authorization'%}</div>
+{%endif%}
+{% if 'edit_school_members' in content_perms%}
+<div><a href="/schools/member/edit/{{member.pk}}/">edit</a></div>
+{%endif%}
+{% endblock content %}
